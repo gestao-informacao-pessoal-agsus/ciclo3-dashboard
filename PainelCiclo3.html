@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acompanhamento Ciclo 3 - Saúde Indígena</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="dashboardFrame" src="" frameborder="0"></iframe>
+
+    <script>
+        // URLs dos seus 2 dashboards no Looker Studio
+        const dashboards = [
+            "https://lookerstudio.google.com/embed/reporting/685d4441-7318-4659-8d08-e72db538f544/page/p_7ouf0vo3vd",
+            "https://lookerstudio.google.com/embed/reporting/685d4441-7318-4659-8d08-e72db538f544/page/p_i96at2q3vd"
+        ];
+
+        let currentIndex = 0;
+        const iframe = document.getElementById('dashboardFrame');
+
+        function loadNextDashboard() {
+            iframe.src = dashboards[currentIndex];
+            currentIndex = (currentIndex + 1) % dashboards.length; // Alterna entre 0 e 1
+        }
+
+        // Carrega o primeiro dashboard
+        loadNextDashboard();
+
+        // Alterna a cada 5 minutos (300.000 milissegundos)
+        setInterval(loadNextDashboard, 300000);
+    </script>
+</body>
+</html>

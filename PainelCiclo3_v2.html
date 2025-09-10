@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acompanhamento Ciclo 3 - Saúde Indígena</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="dashboardFrame" src="" frameborder="0"></iframe>
+
+    <script>
+        // 🔁 Substitua pelas URLs EMBED dos seus 2 dashboards
+        const dashboards = [
+            "https://lookerstudio.google.com/embed/reporting/685d4441-7318-4659-8d08-e72db538f544/page/p_7ouf0vo3vd",
+            "https://lookerstudio.google.com/embed/reporting/685d4441-7318-4659-8d08-e72db538f544/page/p_i96at2q3vd"
+        ];
+
+        let currentIndex = 0;
+        const iframe = document.getElementById('dashboardFrame');
+
+        function loadNextDashboard() {
+            // Define a URL do próximo dashboard
+            iframe.src = dashboards[currentIndex];
+
+            // Log no console (opcional, para debug)
+            console.log("Carregando: " + dashboards[currentIndex]);
+
+            // Passa para o próximo índice (alterna entre 0 e 1)
+            currentIndex = (currentIndex + 1) % dashboards.length;
+
+            // Aguarda 10 segundos para renderização inicial
+            setTimeout(() => {
+                // Agenda a próxima troca para daqui a 5 minutos
+                setTimeout(loadNextDashboard, 300000); // 5 minutos = 300.000 ms
+            }, 10000); // Espera 10 segundos após definir o .src
+        }
+
+        // 👉 Inicia o ciclo
+        loadNextDashboard();
+
+        // 📺 Tenta forçar fullscreen (opcional, pode ajudar em algumas TVs)
+        function requestFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) elem.requestFullscreen();
+            else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen(); // TVs Samsung/LG
+            else if (elem.msRequestFullscreen) elem.msRequestFullscreen(); // fallback
+        }
+
+        // Tenta fullscreen após 2 segundos (evita falha por carregamento)
+        setTimeout(requestFullscreen, 2000);
+    </script>
+</body>
+</html>
